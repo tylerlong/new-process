@@ -10,7 +10,7 @@ export enum NewProcessEvents {
   OUTPUT = 'OUTPUT',
 }
 
-export class NewProcess extends EventEmitter {
+class NewProcess extends EventEmitter {
   command: string;
   args: string[];
   childProcess?: ChildProcess;
@@ -55,3 +55,5 @@ export class NewProcess extends EventEmitter {
     });
   }
 }
+
+export default NewProcess;

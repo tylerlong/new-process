@@ -1,6 +1,6 @@
 import path from 'path';
 
-import {NewProcess, NewProcessEvents} from './index';
+import NewProcess, {NewProcessEvents} from './index';
 
 const ytdlPath = path.join(__dirname, 'youtube-dl');
 

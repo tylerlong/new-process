@@ -1,6 +1,6 @@
-# child-process-promise-test
+# new-process
 
-Turn `child_process` methods into promise.
+Spawn a new process to execute a command.
 
 
 ## Requirements
