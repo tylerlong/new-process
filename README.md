@@ -9,7 +9,7 @@ Turn `child_process` methods into promise.
 - [DONE] Could kill a running process
 - [DONE] Could get output in real time
 - [DONE] Could get final output as a whole
-- [DONE] Could catch errors and report
+- [DONE] Could report errors
 
 
 ## Usage

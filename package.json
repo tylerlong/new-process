@@ -1,14 +1,18 @@
 {
+  "name": "new-process",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "test": "ts-node ./src/test.ts"
+    "test": "ts-node ./src/test.ts",
+    "prepublishOnly": "tsc"
   },
   "devDependencies": {
     "@types/node": "^16.10.3",
     "gts": "^3.1.0",
     "ts-node": "^10.2.1",
     "typescript": "^4.4.3",
-    "yarn-upgrade-all": "^0.5.4",
-    "wait-for-async": "^0.5.0"
-  }
+    "wait-for-async": "^0.5.0",
+    "yarn-upgrade-all": "^0.5.4"
+  },
+  "files": ["build/"]
 }

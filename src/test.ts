@@ -1,20 +1,20 @@
 import path from 'path';
 
-import {SpawnPromise} from './index';
+import {NewProcess, NewProcessEvents} from './index';
 
 const ytdlPath = path.join(__dirname, 'youtube-dl');
 
-const spawnPromise = new SpawnPromise(ytdlPath, [
+const newProcess = new NewProcess(ytdlPath, [
   '-f',
   'best',
   'https://www.youtube.com/watch?v=LOHNL9cvfmY',
 ]);
-spawnPromise.start();
+newProcess.start();
 
 (async () => {
-  spawnPromise.on('output', message => {
+  newProcess.on(NewProcessEvents.OUTPUT, message => {
     console.log(message);
   });
-  const result = await spawnPromise.getResult();
+  const result = await newProcess.getResult();
   console.log(result);
 })();
