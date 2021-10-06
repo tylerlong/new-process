@@ -8,6 +8,7 @@ export type Result = {
 
 export enum NewProcessEvents {
   OUTPUT = 'OUTPUT',
+  ERROR = 'ERROR',
 }
 
 class NewProcess extends EventEmitter {
@@ -33,6 +34,7 @@ class NewProcess extends EventEmitter {
     this.childProcess.stderr?.setEncoding('utf-8');
     this.childProcess.stderr?.on('data', data => {
       this.errors.push(data.trim());
+      this.emit(NewProcessEvents.ERROR, data.trim());
     });
     this.childProcess.on('exit', () => {
       this.childProcess = undefined;
