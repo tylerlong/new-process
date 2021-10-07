@@ -2,6 +2,7 @@ import {spawn, ChildProcess} from 'child_process';
 import EventEmitter from 'events';
 
 export type Result = {
+  code: number | null;
   outputs: string[];
   errors: string[];
 };
@@ -15,6 +16,7 @@ class NewProcess extends EventEmitter {
   command: string;
   args: string[];
   childProcess?: ChildProcess;
+  code: number | null = null;
   outputs: string[] = [];
   errors: string[] = [];
 
@@ -36,7 +38,8 @@ class NewProcess extends EventEmitter {
       this.errors.push(data.trim());
       this.emit(NewProcessEvents.ERROR, data.trim());
     });
-    this.childProcess.on('exit', () => {
+    this.childProcess.on('exit', code => {
+      this.code = code;
       this.childProcess = undefined;
     });
   }
@@ -48,11 +51,15 @@ class NewProcess extends EventEmitter {
 
   getResult(): Promise<Result> {
     return new Promise(resolve => {
-      this.childProcess?.on('exit', () => {
-        return resolve({outputs: this.outputs, errors: this.errors});
+      this.childProcess?.on('exit', code => {
+        return resolve({outputs: this.outputs, errors: this.errors, code});
       });
       if (this.childProcess === undefined) {
-        return resolve({outputs: this.outputs, errors: this.errors});
+        return resolve({
+          outputs: this.outputs,
+          errors: this.errors,
+          code: this.code,
+        });
       }
     });
   }
